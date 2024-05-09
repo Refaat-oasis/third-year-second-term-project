@@ -11,13 +11,13 @@ class ApiService {
     );
   }
 
-  Future<UserModel?> addNewUser(UserModel user) async {
+  Future<user_model?> addNewUser(user_model user) async {
     Response<Map<String, dynamic>> response =
         //
         await dio.post('/api/v1/user');
 
     if (response.data != null) {
-      return UserModel.fromJson(response.data!);
+      return user_model.fromJson(response.data!);
     }
     return null;
   }

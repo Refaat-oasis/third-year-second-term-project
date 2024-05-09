@@ -31,6 +31,12 @@ class LayoutScreenState extends State<LayoutScreen> {
         label: "Help Center",
       ),
       const BottomNavigationBarItem(
+        icon: Icon(Icons.history),
+        label: "History",
+      ),
+
+
+      const BottomNavigationBarItem(
         icon: Icon(Icons.settings),
         label: "Setting",
       ),

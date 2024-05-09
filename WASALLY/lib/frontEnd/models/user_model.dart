@@ -1,18 +1,18 @@
-class UserModel {
+class user_model {
   late String? id;
   late String name;
   late String email;
   late String mobilePhone;
   late String password;
 
-  UserModel(
+  user_model(
       {this.id,
       required this.email,
       required this.name,
       required this.password,
       required this.mobilePhone});
 
-  factory UserModel.fromJson(Map<String, dynamic> json) => UserModel(
+  factory user_model.fromJson(Map<String, dynamic> json) => user_model(
       id: json['_id'],
       email: json['email'],
       name: json['name'],

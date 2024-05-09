@@ -1,7 +1,6 @@
 // ignore_for_file: sized_box_for_whitespace, use_build_context_synchronously, avoid_print
 
-import 'package:Wasally/frontEnd/models/user_model.dart';
-import 'package:Wasally/frontEnd/services/api_service.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import '../login_signup/login_screen.dart';
 
@@ -18,6 +17,21 @@ class _SignUpCustomerState extends State<SignUpCustomer> {
   final TextEditingController usernameController = TextEditingController();
   final TextEditingController emailcontroller = TextEditingController();
   final TextEditingController passwordcontroller = TextEditingController();
+
+  Future addnewuser() async {
+    print('add new user');
+    try {
+      await FirebaseFirestore.instance.collection('users').add({
+        'username': usernameController.text.trim(),
+        'email': emailcontroller.text.trim(),
+        'password': passwordcontroller.text.trim(),
+        'phonenumber': phonenumbercontroller.text.trim(),
+      });
+      print('user added successfully!');
+    } catch (e) {
+      print('Error adding user: $e');
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -167,7 +181,7 @@ class _SignUpCustomerState extends State<SignUpCustomer> {
                           controller: passwordcontroller,
                           validator: (value) {
                             final RegExp passwordRegex = RegExp(
-                                r'^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[!@#\$&*~]).{8,}$');
+                                r'^(?=.?[A-Z])(?=.?[a-z])(?=.?[0-9])(?=.?[!@#\$&*~]).{8,}$');
                             if (!passwordRegex.hasMatch(value!)) {
                               return 'Invalid Password';
                             } else {
@@ -220,12 +234,7 @@ class _SignUpCustomerState extends State<SignUpCustomer> {
                           color: Colors.orange,
                           onPressed: () async {
                             if (formKey.currentState!.validate()) {
-                              UserModel user = UserModel(
-                                  email: emailcontroller.text,
-                                  name: usernameController.text,
-                                  password: passwordcontroller.text,
-                                  mobilePhone: phonenumbercontroller.text);
-                              await ApiService().addNewUser(user);
+                              await addnewuser();
                               Navigator.push(
                                   context,
                                   MaterialPageRoute(

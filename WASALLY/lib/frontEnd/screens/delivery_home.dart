@@ -224,11 +224,7 @@ class deliveryorders extends StatelessWidget {
                             Navigator.push(
                               context,
                               MaterialPageRoute(
-                                builder: (context) => TrackingScreen(
-                                  isDriver: true,
-                                  neworder: neworder,
-                                  isaccepted: isaccepted,
-                                ),
+                                builder: (context) => const TrackingScreen(),
                               ),
                             );
                           }

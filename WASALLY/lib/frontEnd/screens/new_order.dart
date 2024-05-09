@@ -591,11 +591,7 @@ class _NewOrderState extends State<NewOrderScreen> {
                               Navigator.push(
                                   context,
                                   MaterialPageRoute(
-                                    builder: (context) => TrackingScreen(
-                                      isDriver: false,
-                                      neworder: sendorder(),
-                                      isaccepted: isaccepted,
-                                    ),
+                                    builder: (context) => const TrackingScreen(),
                                   ));
                             }
                           },
