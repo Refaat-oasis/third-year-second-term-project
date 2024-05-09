@@ -4,6 +4,7 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:location/location.dart';
+import 'package:wasaalydriver/frontEnd/screens/delivery_home.dart';
 import 'orderreceivedscreen.dart';
 
 class TrackingLocationScreen extends StatefulWidget {
@@ -150,37 +151,61 @@ class _TrackingLocationScreenState extends State<TrackingLocationScreen> {
                                 Text('20\$', style: TextStyle(fontSize: 18)),
                               ],
                             ),
-                            Center(
-                              child: ElevatedButton(
-                                style: ButtonStyle(
-                                  backgroundColor:
-                                      MaterialStateProperty.all(Colors.orange),
-                                ),
-                                onPressed: () {
-                                  // Navigate to the OrderReceivedScreen with a simple animation
-                                  Navigator.push(
-                                    context,
-                                    PageRouteBuilder(
-                                      transitionDuration:
-                                          const Duration(milliseconds: 500),
-                                      pageBuilder: (_, __, ___) =>
-                                          const OrderReceivedScreen(),
-                                      transitionsBuilder:
-                                          (_, animation, __, child) {
-                                        return FadeTransition(
-                                          opacity: animation,
-                                          child: child,
-                                        );
-                                      },
-                                    ),
-                                  );
-                                },
-                                child: const Text(
-                                  "Order Received",
-                                  style: TextStyle(color: Colors.white),
-                                ),
-                              ),
-                            ),
+                            Row(
+  mainAxisAlignment: MainAxisAlignment.center,
+  children: [
+    ElevatedButton(
+      style: ButtonStyle(
+        backgroundColor: MaterialStateProperty.all(Colors.orange),
+      ),
+      onPressed: () {
+        // Navigate to the OrderReceivedScreen with a simple animation
+        Navigator.push(
+          context,
+          PageRouteBuilder(
+            transitionDuration: Duration(milliseconds: 500),
+            pageBuilder: (_, __, ___) => OrderReceivedScreen(),
+            transitionsBuilder: (_, animation, __, child) {
+              return FadeTransition(
+                opacity: animation,
+                child: child,
+              );
+            },
+          ),
+        );
+      },
+      child: const Text(
+        "Order Received",
+        style: TextStyle(color: Colors.white),
+      ),
+    ),
+    SizedBox(width: 10), // Add some space between the buttons
+    ElevatedButton(
+      style: ButtonStyle(
+        backgroundColor: MaterialStateProperty.all(Colors.red),
+      ),
+      onPressed: () {
+        Navigator.push(
+          context,
+          PageRouteBuilder(
+            transitionDuration: Duration(milliseconds: 500),
+            pageBuilder: (_, __, ___) => DeliveryHome(),
+            transitionsBuilder: (_, animation, __, child) {
+              return FadeTransition(
+                opacity: animation,
+                child: child,
+              );
+            },
+          ),
+        );
+      },
+      child: const Text( 
+        "Cancel Order",
+        style: TextStyle(color: Colors.white),
+      ),
+    ),
+  ],
+),
                           ],
                         ),
                       ),

@@ -14,7 +14,7 @@ class _SignUpDileveryState extends State<SignUpDilevery> {
   bool isVisible = true;
 
   var formKey = GlobalKey<FormState>();
-
+  var selectedVehicle;
   @override
   void initState() {
     super.initState();
@@ -70,9 +70,11 @@ class _SignUpDileveryState extends State<SignUpDilevery> {
                           validator: (value) {
                             if (value!.isEmpty) {
                               return 'required user name';
-                            } else {
-                              return null;
                             }
+                            if (!RegExp(r'^[a-zA-Z ]+$').hasMatch(value)) {
+                              return "please enter valid user name";
+                            }
+                            return null;
                           },
                           decoration: InputDecoration(
                               focusedBorder: OutlineInputBorder(
@@ -99,9 +101,11 @@ class _SignUpDileveryState extends State<SignUpDilevery> {
                           validator: (value) {
                             if (value!.isEmpty) {
                               return 'required user number';
-                            } else {
-                              return null;
                             }
+                            if (!RegExp(r'^[0-9]{11}$').hasMatch(value)) {
+                              return "please enter valid phone number";
+                            }
+                            return null;
                           },
                           decoration: InputDecoration(
                               focusedBorder: OutlineInputBorder(
@@ -128,9 +132,13 @@ class _SignUpDileveryState extends State<SignUpDilevery> {
                           validator: (value) {
                             if (value!.isEmpty) {
                               return 'required user address';
-                            } else {
-                              return null;
                             }
+                            if (!RegExp(
+                                    "^[a-zA-Z0-9+.-]+@[a-zA-Z0-9+.-]+.(com)")
+                                .hasMatch(value)) {
+                              return "please enter valid email";
+                            }
+                            return null;
                           },
                           decoration: InputDecoration(
                               focusedBorder: OutlineInputBorder(
@@ -153,27 +161,37 @@ class _SignUpDileveryState extends State<SignUpDilevery> {
                       Container(
                         width: 300,
                         height: 60,
-                        child: TextFormField(
-                          validator: (value) {
-                            if (value!.isEmpty) {
-                              return 'required user vehicle type';
-                            } else {
-                              return null;
-                            }
-                          },
-                          decoration: InputDecoration(
-                              focusedBorder: OutlineInputBorder(
-                                  borderSide:
-                                      const BorderSide(color: Colors.orange),
-                                  borderRadius: BorderRadius.circular(28)),
-                              labelText: " Vehicle Type",
-                              labelStyle: const TextStyle(color: Colors.black),
-                              prefixIcon: const Icon(
-                                Icons.directions_car_rounded,
-                                color: Colors.grey,
-                              ),
-                              border: OutlineInputBorder(
-                                  borderRadius: BorderRadius.circular(28))),
+                        decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(28),
+                          border: Border.all(color: Colors.grey),
+                        ),
+                        child: Padding(
+                          padding: const EdgeInsets.symmetric(horizontal: 16),
+                          child: DropdownButton<String>(
+                            value: selectedVehicle,
+                            hint: const Text(
+                              'select a vehicle',
+                              style:
+                                  TextStyle(color: Colors.black, fontSize: 16),
+                            ),
+                            onChanged: (String? newValue) {
+                              setState(() {
+                                selectedVehicle = newValue;
+                              });
+                              print(newValue);
+                            },
+                            items: <String>['car', 'truck', 'courier']
+                                .map<DropdownMenuItem<String>>((String value) {
+                              return DropdownMenuItem<String>(
+                                value: value,
+                                child: Text(value),
+                              );
+                            }).toList(),
+                            style: const TextStyle(color: Colors.black),
+                            icon: const Icon(Icons.arrow_drop_down,
+                                color: Colors.grey),
+                            isExpanded: true,
+                          ),
                         ),
                       ),
                       const SizedBox(
@@ -186,9 +204,13 @@ class _SignUpDileveryState extends State<SignUpDilevery> {
                           validator: (value) {
                             if (value!.isEmpty) {
                               return 'required user password';
-                            } else {
-                              return null;
                             }
+                            if (!RegExp(
+                                    "^(?=.*[A-Z])(?=.*[a-z])(?=.*[0-9])(?=.*[.!@%^&(){}\\[\\]:;<>,.?/~_+-=|\\\\]).{8,10}")
+                                .hasMatch(value)) {
+                              return "password must contain at least 8 characters ,both uppercase and lowercase letter, one number and special character";
+                            }
+                            return null;
                           },
                           obscureText: isVisible,
                           keyboardType: TextInputType.visiblePassword,

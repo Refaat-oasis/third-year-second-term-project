@@ -94,9 +94,12 @@ class _SignUpCustomerState extends State<SettingScreen> {
                           validator: (value) {
                             if (value!.isEmpty) {
                               return 'required user name';
-                            } else {
-                              return null;
                             }
+                            if (!RegExp(r'^[a-zA-Z ]+$').hasMatch(value)) {
+                              return "please enter valid user name";
+                            }
+                            return null;
+                          
                           },
                         ),
                       ),
@@ -108,12 +111,14 @@ class _SignUpCustomerState extends State<SettingScreen> {
                         height: 60,
                         child: TextFormField(
                           keyboardType: TextInputType.phone,
-                          validator: (value) {
+                         validator: (value) {
                             if (value!.isEmpty) {
                               return 'required user number';
-                            } else {
-                              return null;
                             }
+                            if (!RegExp(r'^[0-9]{11}$').hasMatch(value)) {
+                              return "please enter valid phone number";
+                            }
+                            return null;
                           },
                           decoration: InputDecoration(
                               focusedBorder: OutlineInputBorder(
@@ -140,9 +145,13 @@ class _SignUpCustomerState extends State<SettingScreen> {
                           validator: (value) {
                             if (value!.isEmpty) {
                               return 'required user address';
-                            } else {
-                              return null;
                             }
+                            if (!RegExp(
+                                    "^[a-zA-Z0-9+.-]+@[a-zA-Z0-9+.-]+.(com)")
+                                .hasMatch(value)) {
+                              return "please enter valid email";
+                            }
+                            return null;
                           },
                           decoration: InputDecoration(
                               focusedBorder: OutlineInputBorder(
@@ -169,9 +178,13 @@ class _SignUpCustomerState extends State<SettingScreen> {
                           validator: (value) {
                             if (value!.isEmpty) {
                               return 'required user password';
-                            } else {
-                              return null;
                             }
+                            if (!RegExp(
+                                    "^(?=.*[A-Z])(?=.*[a-z])(?=.*[0-9])(?=.*[.!@%^&(){}\\[\\]:;<>,.?/~_+-=|\\\\]).{8,10}")
+                                .hasMatch(value)) {
+                              return "password must contain at least 8 characters ,both uppercase and lowercase letter, one number and special character";
+                            }
+                            return null;
                           },
                           obscureText: isVisible,
                           keyboardType: TextInputType.visiblePassword,
