@@ -57,7 +57,7 @@ class _NewOrderState extends State<NewOrderScreen> {
   }
 
   late String deliverymethod;
-  Neworder sendorder() {
+  Order sendorder() {
     String startpos = fromstreet.text.trim();
     String endpos = tostreet.text.trim();
     String startphone = fromphone.text.trim();
@@ -68,7 +68,7 @@ class _NewOrderState extends State<NewOrderScreen> {
     } else if (truckpressed) {
       deliverymethod = "truck";
     }
-    Neworder neworder = Neworder(startpos, endpos, startphone, deliverymethod);
+    Order neworder = Order(startpos, endpos, startphone, deliverymethod);
     return neworder;
   }
 

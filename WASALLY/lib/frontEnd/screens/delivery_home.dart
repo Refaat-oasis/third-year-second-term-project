@@ -1,21 +1,20 @@
 // ignore_for_file: sized_box_for_whitespace, unused_import, unused_local_variable, must_be_immutable, duplicate_ignore, camel_case_types
-import 'package:cloud_firestore/cloud_firestore.dart';
+
 import 'package:flutter/material.dart';
 import 'package:modal_progress_hud_nsn/modal_progress_hud_nsn.dart';
 import '../screens/tracking_screen.dart';
-import '../models/neworder.dart';
+import '../models/order.dart';
 
 class DeliveryHome extends StatelessWidget {
   DeliveryHome({super.key});
 
-  CollectionReference neworder =
-      FirebaseFirestore.instance.collection('neworder');
+
   bool isloading = true;
 
   @override
   Widget build(BuildContext context) {
     return StreamBuilder<QuerySnapshot>(
-      stream: neworder.orderBy('createdAt', descending: true).snapshots(),
+      stream: Order.orderBy('createdAt', descending: true).snapshots(),
       builder: (context, snapshot) {
         if (snapshot.connectionState == ConnectionState.waiting) {
           return ModalProgressHUD(
@@ -23,9 +22,9 @@ class DeliveryHome extends StatelessWidget {
             child: const Scaffold(),
           );
         } else {
-          List<Neworder> neworderlist = [];
+          List<Order> neworderlist = [];
           for (int i = 0; i < snapshot.data!.docs.length; i++) {
-            neworderlist.add(Neworder.fromJson(snapshot.data!.docs[i]));
+            neworderlist.add(Order.fromJson(snapshot.data!.docs[i]));
           }
           isloading = false;
           return ModalProgressHUD(
@@ -60,10 +59,10 @@ class DeliveryHome extends StatelessWidget {
 class deliveryorders extends StatelessWidget {
   deliveryorders({required this.neworder, super.key});
 
-  Neworder neworder;
+  Order neworder;
   late String deliverymethod;
   String usedmethod() {
-    deliverymethod = neworder.deliverymethod;
+    deliverymethod = neworder.dlelivaryMethod;
     return deliverymethod;
   }
 
@@ -188,20 +187,20 @@ class deliveryorders extends StatelessWidget {
                     height: 3,
                   ),
                   Text(
-                    neworder.fromstreet,
+                    neworder.sourceStreet,
                     style: const TextStyle(fontSize: 25),
                   ),
                   const SizedBox(
                     height: 3,
                   ),
                   Text(
-                    neworder.tostreet,
+                    neworder.destinationStreet,
                     style: const TextStyle(fontSize: 25),
                   ),
                   const SizedBox(
                     height: 3,
                   ),
-                  Text(neworder.fromphone,
+                  Text(neworder.sourceContactPhone,
                       style: const TextStyle(
                         fontSize: 25,
                       )),
