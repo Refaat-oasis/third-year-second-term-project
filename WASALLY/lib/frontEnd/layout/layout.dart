@@ -1,4 +1,5 @@
 import 'package:Wasally/frontEnd/screens/help_screen.dart';
+import 'package:Wasally/frontEnd/screens/history.dart';
 import 'package:Wasally/frontEnd/screens/new_order.dart';
 import 'package:Wasally/frontEnd/screens/setting.dart';
 import 'package:flutter/material.dart';
@@ -34,8 +35,6 @@ class LayoutScreenState extends State<LayoutScreen> {
         icon: Icon(Icons.history),
         label: "History",
       ),
-
-
       const BottomNavigationBarItem(
         icon: Icon(Icons.settings),
         label: "Setting",
@@ -45,6 +44,7 @@ class LayoutScreenState extends State<LayoutScreen> {
     screens = [
       const NewOrderScreen(),
       TopicsPage(),
+      history(),
       SettingScreen(),
     ];
   }
