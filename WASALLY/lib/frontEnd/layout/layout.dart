@@ -35,8 +35,6 @@ class LayoutScreenState extends State<LayoutScreen> {
         icon: Icon(Icons.history),
         label: "History",
       ),
-
-
       const BottomNavigationBarItem(
         icon: Icon(Icons.settings),
         label: "Setting",
