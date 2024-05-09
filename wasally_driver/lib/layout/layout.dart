@@ -1,9 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:wasaalydriver/screens/chat_screen.dart';
 import 'package:wasaalydriver/screens/delivery_home.dart';
 import 'package:wasaalydriver/screens/history.dart';
 import 'package:wasaalydriver/screens/setting.dart';
-import '../screens/new_order.dart';
 
 class LayoutScreen extends StatefulWidget {
   final bool isDriver;
@@ -26,15 +24,10 @@ class _LayoutScreenState extends State<LayoutScreen> {
     super.initState();
 
     bottomsNavBar = [
-      widget.isDriver
-          ? const BottomNavigationBarItem(
-              icon: Icon(Icons.square_outlined),
-              label: "Orders",
-            )
-          : const BottomNavigationBarItem(
-              icon: Icon(Icons.add),
-              label: "New_Order",
-            ),
+      const BottomNavigationBarItem(
+        icon: Icon(Icons.square_outlined),
+        label: "Orders",
+      ),
       const BottomNavigationBarItem(
         icon: Icon(Icons.history),
         label: "history",
@@ -46,7 +39,7 @@ class _LayoutScreenState extends State<LayoutScreen> {
     ];
 
     screens = [
-      widget.isDriver ? DeliveryHome() : NewOrder(),
+      DeliveryHome(),
       history(),
       SettingScreen(),
     ];

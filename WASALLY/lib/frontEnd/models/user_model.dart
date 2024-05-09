@@ -1,43 +1,28 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
+class UserModel {
+  late String? id;
+  late String name;
+  late String email;
+  late String mobilePhone;
+  late String password;
 
-class User {
-  final String? id;
-  final String username;
-  final String email;
-  final String phonenumber;
-  final String password;
-
-  const User(
+  UserModel(
       {this.id,
       required this.email,
-      required this.username,
+      required this.name,
       required this.password,
-      required this.phonenumber});
-  toJson() {
-    return {
-      'username': username,
-      'email': email,
-      'pnonenumber': phonenumber,
-      'password': password,
-    };
-  }
+      required this.mobilePhone});
 
-  factory User.fromSnapshot(
-      DocumentSnapshot<Map<String, dynamic>> document) {
-    final data = document.data()!;
-    return User(
-        email: data['email'],
-        username: data['username'],
-        password: data['password'],
-        phonenumber: data['phonenumber']);
-  }
+  factory UserModel.fromJson(Map<String, dynamic> json) => UserModel(
+      id: json['_id'],
+      email: json['email'],
+      name: json['name'],
+      password: json['password'],
+      mobilePhone: json['mobilePhone']);
 
-  factory User.fromMap(Map<String, dynamic> map, String id) {
-    return User(
-        id: id,
-        email: map['email'],
-        username: map['username'],
-        password: map['password'],
-        phonenumber: map['phonenumber']);
-  }
+  Map<String, dynamic> toJson() => {
+        "name": name,
+        'email': email,
+        'mobilePhone': mobilePhone,
+        "password": password,
+      };
 }

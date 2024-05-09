@@ -1,12 +1,7 @@
 // ignore_for_file: use_build_context_synchronously, avoid_print, sized_box_for_whitespace, avoid_types_as_parameter_names, non_constant_identifier_names, unnecessary_string_interpolations, unused_local_variable
 
-// import 'package:Wasally/frontEnd/layout/layout.dart';
 import 'package:Wasally/frontEnd/layout/layout.dart';
-import 'package:Wasally/frontEnd/screens/new_order.dart';
-// import 'package:Wasally/frontEnd/screens/delivery_home.dart';
-// import 'package:Wasally/frontEnd/screens/new_order.dart';
 import 'package:flutter/material.dart';
-// import '../layout/layout.dart';
 import '../login_signup/signupcustomer_screen.dart';
 
 class LoginScreen extends StatefulWidget {

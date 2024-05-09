@@ -20,66 +20,8 @@ class TrackingScreen extends StatefulWidget {
 }
 
 class _TrackingScreenState extends State<TrackingScreen> {
-  String driverName(isDriver) {
-    if (isDriver) {
-      return userModel.username;
-    } else {
-      return "";
-    }
-  }
-
-  String driverPhone(isDriver) {
-    if (isDriver) {
-      return userModel.phonenumber;
-    } else {
-      return "";
-    }
-  }
-
   late String id;
   late String deliverymethod;
-
-  Future<void> passorder() async {
-    QuerySnapshot orderended = await FirebaseFirestore.instance
-        .collection('neworder')
-        .where('fromstreet', isEqualTo: widget.neworder.fromstreet)
-        .where('tostreet', isEqualTo: widget.neworder.tostreet)
-        .where('fromphone', isEqualTo: widget.neworder.fromphone)
-        .get();
-
-    print('sadaoidsadsinaidijsadssioadjad ${orderended.docs.first.id}');
-    id = orderended.docs.first.id;
-    deleteorder();
-  }
-
-  CollectionReference endedorder =
-      FirebaseFirestore.instance.collection('neworder');
-  Future<void> deleteorder() {
-    return endedorder
-        .doc(id)
-        .delete()
-        .then((value) => print("order Deleted"))
-        .catchError((error) => print("Failed to delete user: $error"));
-  }
-
-  String usedmethod() {
-    deliverymethod = widget.neworder.deliverymethod;
-    return deliverymethod;
-  }
-
-  String getTextBasedOnMethod() {
-    String methodResult = usedmethod();
-
-    if (methodResult == "car") {
-      return "40\$";
-    } else if (methodResult == "courier") {
-      return "25\$";
-    } else if (methodResult == "truck") {
-      return "50\$";
-    } else {
-      return "20\$";
-    }
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -145,8 +87,8 @@ class _TrackingScreenState extends State<TrackingScreen> {
                               height: 30,
                             ),
                             Row(children: [
-                              Text(driverName(widget.isDriver),
-                                  style: const TextStyle(fontSize: 20)),
+                              const Text("driverName()",
+                                  style: TextStyle(fontSize: 20)),
                               const Spacer(),
                               Text(
                                 isAccepted(widget.isaccepted),
@@ -156,8 +98,8 @@ class _TrackingScreenState extends State<TrackingScreen> {
                                 ),
                               ),
                               const Spacer(),
-                              Text(driverPhone(widget.isDriver),
-                                  style: const TextStyle(
+                              const Text("driverPhone",
+                                  style: TextStyle(
                                     fontSize: 20,
                                   )),
                             ]),
@@ -165,51 +107,39 @@ class _TrackingScreenState extends State<TrackingScreen> {
                                 color: Colors.orangeAccent,
                                 thickness: 3,
                                 endIndent: 25),
-                            Row(
+                            const Row(
                               mainAxisAlignment: MainAxisAlignment.spaceAround,
                               children: [
                                 Row(
                                   children: [
                                     Icon(Icons.directions_car_rounded,
-                                        color: usedmethod() == "car"
-                                            ? Colors.orange
-                                            : Colors.grey),
+                                        color: Colors.orange),
                                     Text('car',
                                         style: TextStyle(
                                           fontSize: 25,
-                                          color: usedmethod() == "car"
-                                              ? Colors.orange
-                                              : Colors.grey,
+                                          color: Colors.grey,
                                         )),
                                   ],
                                 ),
                                 Row(
                                   children: [
                                     Icon(Icons.directions_run,
-                                        color: usedmethod() == "courier"
-                                            ? Colors.orange
-                                            : Colors.grey),
+                                        color: Colors.grey),
                                     Text('courier',
                                         style: TextStyle(
                                           fontSize: 25,
-                                          color: usedmethod() == "courier"
-                                              ? Colors.orange
-                                              : Colors.grey,
+                                          color: Colors.grey,
                                         )),
                                   ],
                                 ),
                                 Row(
                                   children: [
                                     Icon(Icons.local_shipping,
-                                        color: usedmethod() == "truck"
-                                            ? Colors.orange
-                                            : Colors.grey),
+                                        color: Colors.grey),
                                     Text('truck',
                                         style: TextStyle(
                                           fontSize: 25,
-                                          color: usedmethod() == "truck"
-                                              ? Colors.orange
-                                              : Colors.grey,
+                                          color: Colors.grey,
                                         )),
                                   ],
                                 ),
@@ -237,20 +167,20 @@ class _TrackingScreenState extends State<TrackingScreen> {
                                 thickness: 3,
                                 endIndent: 25),
                             Row(children: [
-                              Text(getTextBasedOnMethod(),
-                                  style: const TextStyle(fontSize: 25)),
+                              const Text("getTextBasedOnMethod",
+                                  style: TextStyle(fontSize: 25)),
                               const Spacer(),
                               MaterialButton(
                                 shape: RoundedRectangleBorder(
                                     borderRadius: BorderRadius.circular(18)),
                                 color: Colors.orange,
                                 onPressed: () {
-                                  if (widget.isDriver) {
-                                    Navigator.pop(context);
-                                  } else {
-                                    passorder();
-                                    Navigator.pop(context);
-                                  }
+                                  //   if (widget.isDriver) {
+                                  //     Navigator.pop(context);
+                                  //   } else {
+                                  //     passorder();
+                                  //     Navigator.pop(context);
+                                  //   }
                                 },
                                 child: const Text(
                                   "cancel",
@@ -268,7 +198,7 @@ class _TrackingScreenState extends State<TrackingScreen> {
                                       borderRadius: BorderRadius.circular(18)),
                                   color: Colors.orange,
                                   onPressed: () {
-                                    passorder();
+                                    // passorder();
                                     Navigator.pop(context);
                                   },
                                   child: const Text(
