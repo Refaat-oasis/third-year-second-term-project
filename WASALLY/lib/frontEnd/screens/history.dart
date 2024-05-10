@@ -1,17 +1,17 @@
 import 'package:flutter/material.dart';
-import 'package:wasaalydriver/login_signup/login_screen.dart';
-import 'package:wasaalydriver/login_signup/signupdilevery.dart';
-import 'package:wasaalydriver/screens/track_location.dart';
-import 'package:wasaalydriver/screens/tracking_screen.dart';
+// import 'package:wasaalydriver/login_signup/login_screen.dart';
+// import 'package:wasaalydriver/login_signup/signupdilevery.dart';
+// import 'package:wasaalydriver/screens/track_location.dart';
+// import 'package:wasaalydriver/screens/tracking_screen.dart';
 
-class DeliveryHome extends StatefulWidget {
-  const DeliveryHome({Key? key}) : super(key: key);
+class history extends StatefulWidget {
+  const history({Key? key}) : super(key: key);
 
   @override
-  _DeliveryHomeState createState() => _DeliveryHomeState();
+ HistoryState createState() => HistoryState();
 }
 
-class _DeliveryHomeState extends State<DeliveryHome> {
+class HistoryState extends State<history> {
   List<int> orderIds = List.generate(10, (index) => index + 1);
 
   void acceptOrder(int orderId) {
@@ -25,7 +25,7 @@ class _DeliveryHomeState extends State<DeliveryHome> {
     return Scaffold(
       appBar: AppBar(
         centerTitle: true,
-        title: Text("My Requests"),
+        title: Text("Received Requests"),
       ),
       body: Center(
         child: Padding(
@@ -116,56 +116,56 @@ class _DeliveryHomeState extends State<DeliveryHome> {
                                     const Text('20\$',
                                         style: TextStyle(fontSize: 20)),
                                     Spacer(),
-                                    Container(
-                                      width: 99,
-                                      height: 30,
-                                      child: MaterialButton(
-                                        shape: RoundedRectangleBorder(
-                                            borderRadius:
-                                                BorderRadius.circular(18)),
-                                        color: Colors.orange,
-                                        onPressed: () {
-                                          acceptOrder(orderIds[index]);
-                                          if (Navigator.canPop(context)) {
-                                            Navigator.pop(
-                                                context); // Pop the current route first
+                                    // Container(
+                                    //   width: 99,
+                                    //   height: 30,
+                                    //   child: MaterialButton(
+                                    //     shape: RoundedRectangleBorder(
+                                    //         borderRadius:
+                                    //             BorderRadius.circular(18)),
+                                    //     color: Colors.orange,
+                                    //     onPressed: () {
+                                    //       acceptOrder(orderIds[index]);
+                                    //       if (Navigator.canPop(context)) {
+                                    //         Navigator.pop(
+                                    //             context); // Pop the current route first
 
-                                            if (Navigator.of(context)
-                                                .canPop()) {
-                                              // Check if the previous route is available
-                                              // If so, navigate to the TrackingLocationScreen
-                                              Navigator.push(
-                                                context,
-                                                MaterialPageRoute(
-                                                    builder: (context) =>
-                                                        TrackingLocationScreen()),
-                                              );
-                                            } else {
-                                              // If the previous route is not available, navigate to SignUpDilevery
-                                              Navigator.push(
-                                                context,
-                                                MaterialPageRoute(
-                                                    builder: (context) =>
-                                                        SignUpDilevery(true)),
-                                              );
-                                            }
-                                          } else {
-                                            // If the current route cannot be popped, navigate to SignUpDilevery
-                                            Navigator.push(
-                                              context,
-                                              MaterialPageRoute(
-                                                  builder: (context) =>
-                                                      SignUpDilevery(true)),
-                                            );
-                                          }
-                                        },
-                                        child: Text("Accept",
-                                            style: TextStyle(
-                                                color: Colors.white,
-                                                fontWeight: FontWeight.bold,
-                                                fontSize: 18)),
-                                      ),
-                                    ),
+                                    //         if (Navigator.of(context)
+                                    //             .canPop()) {
+                                    //           // Check if the previous route is available
+                                    //           // If so, navigate to the TrackingLocationScreen
+                                    //           Navigator.push(
+                                    //             context,
+                                    //             MaterialPageRoute(
+                                    //                 builder: (context) =>
+                                    //                     TrackingLocationScreen()),
+                                    //           );
+                                    //         } else {
+                                    //           // If the previous route is not available, navigate to SignUpDilevery
+                                    //           Navigator.push(
+                                    //             context,
+                                    //             MaterialPageRoute(
+                                    //                 builder: (context) =>
+                                    //                     SignUpDilevery(true)),
+                                    //           );
+                                    //         }
+                                    //       } else {
+                                    //         // If the current route cannot be popped, navigate to SignUpDilevery
+                                    //         Navigator.push(
+                                    //           context,
+                                    //           MaterialPageRoute(
+                                    //               builder: (context) =>
+                                    //                   SignUpDilevery(true)),
+                                    //         );
+                                    //       }
+                                    //     },
+                                    //     child: Text("Accept",
+                                    //         style: TextStyle(
+                                    //             color: Colors.white,
+                                    //             fontWeight: FontWeight.bold,
+                                    //             fontSize: 18)),
+                                    //   ),
+                                    // ),
                                   ],
                                 )
                               ],

@@ -2,8 +2,8 @@
 
 
 import 'package:flutter/material.dart';
-import 'package:wasaalydriver/frontEnd/screens/chat_screen.dart';
 import 'package:wasaalydriver/frontEnd/screens/delivery_home.dart';
+import 'package:wasaalydriver/frontEnd/screens/history.dart';
 import 'package:wasaalydriver/frontEnd/screens/setting.dart';
 
 class LayoutScreen extends StatefulWidget {
@@ -41,7 +41,7 @@ class _LayoutScreenState extends State<LayoutScreen> {
 
     screens = [
       const DeliveryHome(),
-      ChatsScreen(),
+      history(),
       SettingScreen(),
     ];
   }

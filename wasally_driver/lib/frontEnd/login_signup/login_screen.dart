@@ -13,6 +13,7 @@ class LoginScreen extends StatefulWidget {
 }
 
 class _LoginScreenState extends State<LoginScreen> {
+   bool isVisible = true;
   var formKey = GlobalKey<FormState>();
   @override
   void initState() {
@@ -73,9 +74,13 @@ class _LoginScreenState extends State<LoginScreen> {
                           validator: (value) {
                             if (value!.isEmpty) {
                               return 'required user address';
-                            } else {
-                              return null;
                             }
+                            if (!RegExp(
+                                    "^[a-zA-Z0-9+.-]+@[a-zA-Z0-9+.-]+.(com)")
+                                .hasMatch(value)) {
+                              return "please enter valid email";
+                            }
+                            return null;
                           },
                           decoration: InputDecoration(
                               focusedBorder: OutlineInputBorder(
@@ -102,9 +107,13 @@ class _LoginScreenState extends State<LoginScreen> {
                           validator: (value) {
                             if (value!.isEmpty) {
                               return 'required user password';
-                            } else {
-                              return null;
                             }
+                            if (!RegExp(
+                                    "^(?=.*[A-Z])(?=.*[a-z])(?=.*[0-9])(?=.*[.!@%^&(){}\\[\\]:;<>,.?/~_+-=|\\\\]).{8,10}")
+                                .hasMatch(value)) {
+                              return "password must contain at least 8 characters ,both uppercase and lowercase letter, one number and special character";
+                            }
+                            return null;
                           },
                           decoration: InputDecoration(
                               focusedBorder: OutlineInputBorder(
@@ -117,10 +126,25 @@ class _LoginScreenState extends State<LoginScreen> {
                                 Icons.lock,
                                 color: Colors.grey,
                               ),
-                              suffixIcon: const Icon(
-                                Icons.remove_red_eye_sharp,
-                                color: Colors.grey,
+                              
+                              suffixIcon: InkWell(
+                                onTap: () {
+                                  setState(() {
+                                    isVisible = !isVisible;
+                                  });
+                                },
+                                child: isVisible
+                                    ? const Icon(
+                                        Icons.remove_red_eye_sharp,
+                                        color: Colors.grey,
+                                      )
+                                    : const Icon(
+                                        Icons.visibility_off,
+                                        color: Colors.grey,
+                                      ),
                               ),
+                               
+                             
                               border: OutlineInputBorder(
                                 borderRadius: BorderRadius.circular(28),
                               )),

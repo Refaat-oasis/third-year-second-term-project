@@ -1,12 +1,10 @@
-import 'dart:async';
+// ignore_for_file: sized_box_for_whitespace, avoid_print, avoid_unnecessary_containers
 
-import 'package:flutter/cupertino.dart';
+import 'dart:async';
+import 'package:Wasally/frontEnd/screens/delivery_home.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:location/location.dart';
-import 'package:wasaalydriver/frontEnd/screens/delivery_home.dart';
-
 import 'orderreceivedscreen.dart';
 
 class TrackingLocationScreen extends StatefulWidget {
@@ -72,7 +70,7 @@ class _TrackingLocationScreenState extends State<TrackingLocationScreen> {
               child: Container(
                 width: double.infinity,
                 height: 250,
-                decoration: BoxDecoration(
+                decoration: const BoxDecoration(
                   color: Colors.white,
                   borderRadius: BorderRadius.only(
                     topLeft: Radius.circular(20),
@@ -92,10 +90,10 @@ class _TrackingLocationScreenState extends State<TrackingLocationScreen> {
                             Icons.person,
                             color: Colors.orange,
                           ),
-                          SizedBox(
+                          const SizedBox(
                             height: 25,
                           ),
-                          CircleAvatar(
+                          const CircleAvatar(
                             radius: 7,
                             backgroundColor: Colors.orange,
                           ),
@@ -104,14 +102,14 @@ class _TrackingLocationScreenState extends State<TrackingLocationScreen> {
                             color: Colors.orange,
                             width: 4,
                           ),
-                          Icon(
+                          const Icon(
                             Icons.location_on,
                             color: Colors.orange,
                           ),
-                          Icon(Icons.phone, color: Colors.orange),
+                          const Icon(Icons.phone, color: Colors.orange),
                         ],
                       ),
-                      SizedBox(
+                      const SizedBox(
                         width: 5,
                       ),
                       Container(
@@ -120,35 +118,35 @@ class _TrackingLocationScreenState extends State<TrackingLocationScreen> {
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
-                            SizedBox(
+                            const SizedBox(
                               height: 10,
                             ),
-                            Row(children: [
+                            const Row(children: [
                               Text('Mohammed saleh',
                                   style: TextStyle(fontSize: 17)),
                             ]),
-                            Divider(
+                            const Divider(
                               color: Colors.orangeAccent,
                               thickness: 1.5,
                               endIndent: 25,
                             ),
-                            Text('Benziena Mobile ',
+                            const Text('Benziena Mobile ',
                                 style: TextStyle(fontSize: 18)),
-                            SizedBox(
+                            const SizedBox(
                               height: 3,
                             ),
-                            Text('Bus Station ',
+                            const Text('Bus Station ',
                                 style: TextStyle(fontSize: 18)),
                             const Text('0123456789',
                                 style: TextStyle(
                                   fontSize: 18,
                                 )),
-                            Divider(
+                            const Divider(
                               color: Colors.orangeAccent,
                               thickness: 1.5,
                               endIndent: 25,
                             ),
-                            Row(
+                            const Row(
                               children: [
                                 Text('20\$', style: TextStyle(fontSize: 18)),
                               ],

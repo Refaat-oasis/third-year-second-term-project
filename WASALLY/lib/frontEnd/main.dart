@@ -14,11 +14,12 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-        color: Colors.white,
-        debugShowCheckedModeBanner: false,
-        theme: lightMode,
-        darkTheme: darkMode,
-        themeMode: ThemeMode.light,
-        home: SplashScreen());
+      color: Colors.white,
+      debugShowCheckedModeBanner: false,
+      theme: lightMode,
+      darkTheme: darkMode,
+      themeMode: ThemeMode.light,
+      home: SplashScreen(),
+    );
   }
 }

@@ -181,7 +181,7 @@ class _SignUpCustomerState extends State<SignUpCustomer> {
                           controller: passwordcontroller,
                           validator: (value) {
                             final RegExp passwordRegex = RegExp(
-                                r'^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[!@#\$&*~]).{8,}$');
+                                r'^(?=.?[A-Z])(?=.?[a-z])(?=.?[0-9])(?=.?[!@#\$&*~]).{8,}$');
                             if (!passwordRegex.hasMatch(value!)) {
                               return 'Invalid Password';
                             } else {

@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:wasaalydriver/layout/layout.dart';
+import 'package:Wasally/frontEnd/layout/layout.dart';
 
 class OrderReceivedScreen extends StatefulWidget {
   @override
@@ -29,7 +29,7 @@ class _OrderReceivedScreenState extends State<OrderReceivedScreen>
     // Add a delay before automatically navigating back to the previous screen
     Future.delayed(Duration(seconds: 3), () {
       Navigator.push(
-          context, MaterialPageRoute(builder: (context) => LayoutScreen(true)));
+          context, MaterialPageRoute(builder: (context) =>const LayoutScreen()));
     });
   }
 
