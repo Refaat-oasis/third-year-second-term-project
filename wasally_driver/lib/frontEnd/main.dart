@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:wasaalydriver/components/theme.dart';
+import 'package:wasaalydriver/frontEnd/components/theme.dart';
 import 'package:wasaalydriver/frontEnd/splash/splash_screen.dart';
 
 void main() {

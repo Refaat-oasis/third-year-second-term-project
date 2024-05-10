@@ -1,9 +1,9 @@
 // ignore_for_file: sized_box_for_whitespace, unused_import, equal_keys_in_map, avoid_print, must_be_immutable, dead_code
 
 import 'dart:developer';
+import 'package:Wasally/frontEnd/screens/track_location.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
-import '../models/neworder.dart';
 import '../screens/tracking_screen.dart';
 
 class NewOrderScreen extends StatefulWidget {
@@ -29,48 +29,21 @@ class _NewOrderState extends State<NewOrderScreen> {
   final TextEditingController tophone = TextEditingController();
   final TextEditingController toaddress = TextEditingController();
 
-  Future addneworder() async {
-    try {
-      await FirebaseFirestore.instance.collection('neworder').add({
-        'fromcity': fromcity.text.trim(),
-        'fromstreet': fromstreet.text.trim(),
-        'fromhouse': fromhouse.text.trim(),
-        'fromflat': fromflat.text.trim(),
-        'fromname': fromname.text.trim(),
-        'fromphone': fromphone.text.trim(),
-        'toaddress': fromaddress.text.trim(),
-        'tocity': tocity.text.trim(),
-        'tostreet': tostreet.text.trim(),
-        'tohouse': tohouse.text.trim(),
-        'toflat': toflat.text.trim(),
-        'toname': toname.text.trim(),
-        'tophone': tophone.text.trim(),
-        'toaddress': toaddress.text.trim(),
-        'createdAt': DateTime.now(),
-        'deliverymethod': deliverymethod,
-        'drivername': "",
-      });
-      print('Order added successfully!');
-    } catch (e) {
-      print('Error adding order: $e');
-    }
-  }
-
-  late String deliverymethod;
-  Order sendorder() {
-    String startpos = fromstreet.text.trim();
-    String endpos = tostreet.text.trim();
-    String startphone = fromphone.text.trim();
-    if (courierpressed) {
-      deliverymethod = "courier";
-    } else if (carpressed) {
-      deliverymethod = "car";
-    } else if (truckpressed) {
-      deliverymethod = "truck";
-    }
-    Order neworder = Order(startpos, endpos, startphone, deliverymethod);
-    return neworder;
-  }
+  // late String deliverymethod;
+  // Order sendorder() {
+  //   String startpos = fromstreet.text.trim();
+  //   String endpos = tostreet.text.trim();
+  //   String startphone = fromphone.text.trim();
+  //   if (courierpressed) {
+  //     deliverymethod = "courier";
+  //   } else if (carpressed) {
+  //     deliverymethod = "car";
+  //   } else if (truckpressed) {
+  //     deliverymethod = "truck";
+  //   }
+  // Order neworder = Order(startpos, endpos, startphone, deliverymethod);
+  // return neworder;
+  // }
 
   var formKey = GlobalKey<FormState>();
   bool courierpressed = false;
@@ -586,12 +559,13 @@ class _NewOrderState extends State<NewOrderScreen> {
                           color: Colors.orange,
                           onPressed: () {
                             if (formKey.currentState!.validate()) {
-                              addneworder();
-                              const bool isaccepted = false;
+                              // addneworder();
+                              //  const bool isaccepted = false;
                               Navigator.push(
                                   context,
                                   MaterialPageRoute(
-                                    builder: (context) => const TrackingScreen(),
+                                    builder: (context) =>
+                                        const TrackingLocationScreen(),
                                   ));
                             }
                           },

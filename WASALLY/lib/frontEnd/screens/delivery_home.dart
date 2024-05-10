@@ -1,20 +1,20 @@
 // ignore_for_file: sized_box_for_whitespace, unused_import, unused_local_variable, must_be_immutable, duplicate_ignore, camel_case_types
-
+import 'package:Wasally/frontEnd/screens/tracking_screen.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:modal_progress_hud_nsn/modal_progress_hud_nsn.dart';
-import '../screens/tracking_screen.dart';
-import '../models/order.dart';
 
 class DeliveryHome extends StatelessWidget {
   DeliveryHome({super.key});
 
-
+  CollectionReference neworder =
+      FirebaseFirestore.instance.collection('neworder');
   bool isloading = true;
 
   @override
   Widget build(BuildContext context) {
     return StreamBuilder<QuerySnapshot>(
-      stream: Order.orderBy('createdAt', descending: true).snapshots(),
+      stream: neworder.orderBy('createdAt', descending: true).snapshots(),
       builder: (context, snapshot) {
         if (snapshot.connectionState == ConnectionState.waiting) {
           return ModalProgressHUD(
@@ -22,9 +22,9 @@ class DeliveryHome extends StatelessWidget {
             child: const Scaffold(),
           );
         } else {
-          List<Order> neworderlist = [];
+          List<Neworder> neworderlist = [];
           for (int i = 0; i < snapshot.data!.docs.length; i++) {
-            neworderlist.add(Order.fromJson(snapshot.data!.docs[i]));
+            // neworderlist.add(Neworder.fromJson(snapshot.data!.docs[i]));
           }
           isloading = false;
           return ModalProgressHUD(
@@ -56,29 +56,44 @@ class DeliveryHome extends StatelessWidget {
   }
 }
 
-class deliveryorders extends StatelessWidget {
-  deliveryorders({required this.neworder, super.key});
+class Neworder {
+  static Neworder? fromJson(QueryDocumentSnapshot<Object?> doc) {
+    // Your parsing logic goes here
 
-  Order neworder;
-  late String deliverymethod;
-  String usedmethod() {
-    deliverymethod = neworder.dlelivaryMethod;
-    return deliverymethod;
-  }
-
-  String getTextBasedOnMethod() {
-    String methodResult = usedmethod();
-
-    if (methodResult == "car") {
-      return "40\$";
-    } else if (methodResult == "courier") {
-      return "25\$";
-    } else if (methodResult == "truck") {
-      return "50\$";
+    // Example:
+    if (doc.exists) {
+      // Parse the document and create a Neworder object
+      return Neworder(/* Pass necessary parameters */);
     } else {
-      return "20\$";
+      // Document doesn't exist, return null or throw an error
+      return null;
     }
   }
+}
+
+class deliveryorders extends StatelessWidget {
+  const deliveryorders({super.key, required Neworder neworder});
+
+  // Neworder neworder;
+  // late String deliverymethod;
+  // String usedmethod() {
+  //   deliverymethod = neworder.deliverymethod;
+  //   return deliverymethod;
+  // }
+
+  // String getTextBasedOnMethod() {
+  //   String methodResult = usedmethod();
+
+  //   if (methodResult == "car") {
+  //     return "40\$";
+  //   } else if (methodResult == "courier") {
+  //     return "25\$";
+  //   } else if (methodResult == "truck") {
+  //     return "50\$";
+  //   } else {
+  //     return "20\$";
+  //   }
+  // }
 
   @override
   Widget build(BuildContext context) {
@@ -127,56 +142,42 @@ class deliveryorders extends StatelessWidget {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Row(
+                  const Row(
                     mainAxisAlignment: MainAxisAlignment.spaceAround,
                     children: [
                       Row(
                         children: [
                           Icon(Icons.directions_car_rounded,
-                              color: usedmethod() == "car"
-                                  ? Colors.orange
-                                  : Colors.grey),
+                              color: Colors.orange),
                           Text(
                             'car',
                             style: TextStyle(
                               fontSize: 25,
-                              color: usedmethod() == "car"
-                                  ? Colors.orange
-                                  : Colors.grey,
+                              color: Colors.grey,
                             ),
                           ),
                         ],
                       ),
                       Row(
                         children: [
-                          Icon(Icons.directions_run,
-                              color: usedmethod() == "courier"
-                                  ? Colors.orange
-                                  : Colors.grey),
+                          Icon(Icons.directions_run, color: Colors.grey),
                           Text(
                             'courier',
                             style: TextStyle(
                               fontSize: 25,
-                              color: usedmethod() == "courier"
-                                  ? Colors.orange
-                                  : Colors.grey,
+                              color: Colors.grey,
                             ),
                           ),
                         ],
                       ),
                       Row(
                         children: [
-                          Icon(Icons.local_shipping,
-                              color: usedmethod() == "truck"
-                                  ? Colors.orange
-                                  : Colors.grey),
+                          Icon(Icons.local_shipping, color: Colors.grey),
                           Text(
                             'truck',
                             style: TextStyle(
                               fontSize: 25,
-                              color: usedmethod() == "truck"
-                                  ? Colors.orange
-                                  : Colors.grey,
+                              color: Colors.grey,
                             ),
                           ),
                         ],
@@ -186,29 +187,29 @@ class deliveryorders extends StatelessWidget {
                   const SizedBox(
                     height: 3,
                   ),
-                  Text(
-                    neworder.sourceStreet,
-                    style: const TextStyle(fontSize: 25),
+                  const Text(
+                    'neworder.fromstreet',
+                    style: TextStyle(fontSize: 25),
                   ),
                   const SizedBox(
                     height: 3,
                   ),
-                  Text(
-                    neworder.destinationStreet,
-                    style: const TextStyle(fontSize: 25),
+                  const Text(
+                    'neworder.tostreet',
+                    style: TextStyle(fontSize: 25),
                   ),
                   const SizedBox(
                     height: 3,
                   ),
-                  Text(neworder.sourceContactPhone,
-                      style: const TextStyle(
+                  const Text('neworder.fromphone',
+                      style: TextStyle(
                         fontSize: 25,
                       )),
                   const Divider(
                       color: Colors.orangeAccent, thickness: 3, endIndent: 25),
                   Row(children: [
-                    Text(getTextBasedOnMethod(),
-                        style: const TextStyle(fontSize: 25)),
+                    const Text('getTextBasedOnMethod',
+                        style: TextStyle(fontSize: 25)),
                     const Spacer(),
                     Container(
                       width: 110,
@@ -223,7 +224,11 @@ class deliveryorders extends StatelessWidget {
                             Navigator.push(
                               context,
                               MaterialPageRoute(
-                                builder: (context) => const TrackingScreen(),
+                                builder: (context) => const TrackingScreen(
+                                    // isDriver: true,
+                                    // neworder: neworder,
+                                    // isaccepted: isaccepted,
+                                    ),
                               ),
                             );
                           }
