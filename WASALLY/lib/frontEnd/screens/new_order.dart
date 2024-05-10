@@ -87,7 +87,7 @@ class _NewOrderState extends State<NewOrderScreen> {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Align(
+                const Align(
                   alignment: Alignment.center,
                   child: Text(
                     'Create a new order',
@@ -97,16 +97,16 @@ class _NewOrderState extends State<NewOrderScreen> {
                     ),
                   ),
                 ),
-                SizedBox(
+                const SizedBox(
                   height: 10,
                 ),
-                Text(
+                const Text(
                   'Delivery method :',
                   style: TextStyle(
                     fontWeight: FontWeight.bold,
                   ),
                 ),
-                SizedBox(
+                const SizedBox(
                   height: 10,
                 ),
                 Row(
@@ -230,10 +230,10 @@ class _NewOrderState extends State<NewOrderScreen> {
                     ),
                   ],
                 ),
-                SizedBox(
+                const SizedBox(
                   height: 10,
                 ),
-                Text(
+                const Text(
                   'From',
                   style: TextStyle(
                     fontSize: 22,
@@ -241,17 +241,17 @@ class _NewOrderState extends State<NewOrderScreen> {
                     color: Colors.orange,
                   ),
                 ),
-                SizedBox(
+                const SizedBox(
                   height: 8,
                 ),
-                Text(
+                const Text(
                   'Address',
                   style: TextStyle(
                     fontSize: 16,
                     fontWeight: FontWeight.bold,
                   ),
                 ),
-                SizedBox(
+                const SizedBox(
                   height: 8,
                 ),
                 Container(
@@ -570,7 +570,7 @@ class _NewOrderState extends State<NewOrderScreen> {
                           Navigator.push(
                               context,
                               MaterialPageRoute(
-                                builder: (context) => TrackingScreen(
+                                builder: (context) => const TrackingScreen(
                                     // isDriver: false,
                                     // neworder: sendorder(),
                                     // isaccepted: isaccepted,

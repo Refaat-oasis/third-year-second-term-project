@@ -1,9 +1,7 @@
 const EXPRESS = require("express");
-
 const MORGAN = require("morgan");
 
 const USER_ROUTERS = require("./routers/userRouters");
-const CHAT_ROUTERS = require("./routers/chatRouters");
 const DRIVER_ROUTERS = require("./routers/driverRouts");
 const ORDER_ROUTERS = require("./routers/orderRouter");
 
@@ -34,7 +32,7 @@ APP.use((req, res, next) => {
 
 // TALK TO ROUTES
 
-APP.use("/api/v1/chat", CHAT_ROUTERS);
+
 APP.use("/api/v1/user", USER_ROUTERS);
 APP.use("/api/v1/driver", DRIVER_ROUTERS);
 APP.use("/api/v1/order", ORDER_ROUTERS);

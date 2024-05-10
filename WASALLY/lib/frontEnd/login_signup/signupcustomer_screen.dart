@@ -1,5 +1,7 @@
 // ignore_for_file: sized_box_for_whitespace, use_build_context_synchronously, avoid_print
 
+import 'package:Wasally/frontEnd/models/user_model.dart';
+import 'package:Wasally/frontEnd/services/api_service.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import '../login_signup/login_screen.dart';
@@ -18,20 +20,20 @@ class _SignUpCustomerState extends State<SignUpCustomer> {
   final TextEditingController emailcontroller = TextEditingController();
   final TextEditingController passwordcontroller = TextEditingController();
 
-  Future addnewuser() async {
-    print('add new user');
-    try {
-      await FirebaseFirestore.instance.collection('users').add({
-        'username': usernameController.text.trim(),
-        'email': emailcontroller.text.trim(),
-        'password': passwordcontroller.text.trim(),
-        'phonenumber': phonenumbercontroller.text.trim(),
-      });
-      print('user added successfully!');
-    } catch (e) {
-      print('Error adding user: $e');
-    }
-  }
+  // Future addnewuser() async {
+  //   print('add new user');
+  //   try {
+  //     await FirebaseFirestore.instance.collection('users').add({
+  //       'username': usernameController.text.trim(),
+  //       'email': emailcontroller.text.trim(),
+  //       'password': passwordcontroller.text.trim(),
+  //       'phonenumber': phonenumbercontroller.text.trim(),
+  //     });
+  //     print('user added successfully!');
+  //   } catch (e) {
+  //     print('Error adding user: $e');
+  //   }
+  // }
 
   @override
   Widget build(BuildContext context) {
@@ -181,9 +183,9 @@ class _SignUpCustomerState extends State<SignUpCustomer> {
                           controller: passwordcontroller,
                           validator: (value) {
                             final RegExp passwordRegex = RegExp(
-                                r'^(?=.?[A-Z])(?=.?[a-z])(?=.?[0-9])(?=.?[!@#\$&*~]).{8,}$');
+                                r'^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[!@#\$&*~]).{8,}$');
                             if (!passwordRegex.hasMatch(value!)) {
-                              return 'Invalid Password';
+                              return 'Password must contain at least one uppercase letter, one lowercase letter, one digit, one special character, and have a minimum length of 8 characters.';
                             } else {
                               return null;
                             }
@@ -230,23 +232,83 @@ class _SignUpCustomerState extends State<SignUpCustomer> {
                         height: 40,
                         child: MaterialButton(
                           shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(18)),
+                            borderRadius: BorderRadius.circular(18),
+                          ),
                           color: Colors.orange,
                           onPressed: () async {
                             if (formKey.currentState!.validate()) {
-                              await addnewuser();
-                              Navigator.push(
-                                  context,
-                                  MaterialPageRoute(
-                                    builder: (context) => const LoginScreen(),
-                                  ));
+                              user_model user = user_model(
+                                name: usernameController.text,
+                                email: emailcontroller.text,
+                                mobilePhone: phonenumbercontroller.text,
+                                password: passwordcontroller.text,
+                              );
+                              try {
+                                // Use await to wait for the completion of the addNewUser method
+                                user_model? newUser =
+                                    await ApiService().addNewUser(user);
+
+                                if (newUser != null) {
+                                  // Registration successful, navigate to a success screen
+                                  Navigator.pushReplacement(
+                                    context,
+                                    MaterialPageRoute(
+                                      builder: (context) => const LoginScreen(),
+                                    ),
+                                  );
+                                } else {
+                                  // Registration failed, show error message
+                                  showDialog(
+                                    context: context,
+                                    builder: (BuildContext context) {
+                                      return AlertDialog(
+                                        title: const Text('Registration Error'),
+                                        content: const Text(
+                                            'Failed to create user account. Please try again later.'),
+                                        actions: <Widget>[
+                                          TextButton(
+                                            onPressed: () {
+                                              Navigator.of(context).pop();
+                                            },
+                                            child: const Text('OK'),
+                                          ),
+                                        ],
+                                      );
+                                    },
+                                  );
+                                }
+                              } catch (e) {
+                                // Handle registration failure or Dio errors
+                                print('Error: $e');
+                                showDialog(
+                                  context: context,
+                                  builder: (BuildContext context) {
+                                    return AlertDialog(
+                                      title: const Text('Registration Error'),
+                                      content: const Text(
+                                          'Failed to create user account. Please try again later.'),
+                                      actions: <Widget>[
+                                        TextButton(
+                                          onPressed: () {
+                                            Navigator.of(context).pop();
+                                          },
+                                          child: const Text('OK'),
+                                        ),
+                                      ],
+                                    );
+                                  },
+                                );
+                              }
                             }
                           },
-                          child: const Text("Create Account",
-                              style: TextStyle(
-                                  color: Colors.white,
-                                  fontWeight: FontWeight.bold,
-                                  fontSize: 22)),
+                          child: const Text(
+                            "Create Account",
+                            style: TextStyle(
+                              color: Colors.white,
+                              fontWeight: FontWeight.bold,
+                              fontSize: 22,
+                            ),
+                          ),
                         ),
                       ),
                       Padding(

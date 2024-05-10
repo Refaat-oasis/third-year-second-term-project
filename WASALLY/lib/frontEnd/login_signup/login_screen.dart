@@ -2,7 +2,8 @@
 
 // import 'package:Wasally/frontEnd/layout/layout.dart';
 import 'package:Wasally/frontEnd/layout/layout.dart';
-import 'package:Wasally/frontEnd/screens/new_order.dart';
+import 'package:Wasally/frontEnd/models/user_model.dart';
+import 'package:Wasally/frontEnd/services/api_service.dart';
 // import 'package:Wasally/frontEnd/screens/delivery_home.dart';
 // import 'package:Wasally/frontEnd/screens/new_order.dart';
 import 'package:flutter/material.dart';
@@ -169,12 +170,18 @@ class _LoginScreenState extends State<LoginScreen> {
                             borderRadius: BorderRadius.circular(18),
                           ),
                           color: Colors.orange,
-                          onPressed: () {
+                          onPressed: () async {
                             if (formKey.currentState!.validate()) {
                               String email = emailController.text;
                               String password = passwordController.text;
-                              // _searchUser(context, email, password);
-                              // print("$email   $password");
+                              // user_model user = user_model(
+                              //     email: email,
+                              //     name: 'name',
+                              //     password: password,
+                              //     mobilePhone: 'mobilePhone');
+                              // bool login =
+                              //     await ApiService().login(email, password);
+                              // if (login) {
                               Navigator.push(
                                 context,
                                 MaterialPageRoute(
@@ -183,6 +190,7 @@ class _LoginScreenState extends State<LoginScreen> {
                                   },
                                 ),
                               );
+                              // }
                             }
                           },
                           child: const Text(
