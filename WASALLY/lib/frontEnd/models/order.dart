@@ -3,7 +3,7 @@ class Order {
   late DateTime? creationDate;
   late String? orderStatus;
   late String dlelivaryMethod;
-  late String orderPrice;
+  late String? orderPrice;
   late String sourceCity;
   late String sourceStreet;
   late String sourceHouse;
@@ -26,7 +26,7 @@ class Order {
     this.creationDate,
     this.orderStatus,
     required this.dlelivaryMethod,
-    required this.orderPrice,
+    this.orderPrice,
     required this.sourceCity,
     required this.sourceStreet,
     required this.sourceHouse,

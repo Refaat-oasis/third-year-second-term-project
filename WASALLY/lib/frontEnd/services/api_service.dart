@@ -1,5 +1,6 @@
 // ignore_for_file: avoid_print
 
+import 'package:Wasally/frontEnd/models/order.dart';
 import 'package:dio/dio.dart';
 import 'package:Wasally/frontEnd/models/user_model.dart';
 
@@ -47,6 +48,30 @@ class ApiService {
       // Handle Dio errors
       print('Error: $e');
       return null;
+    }
+  }
+
+  Future<Order?> addNewOrder(Order order) async {
+    try {
+      Response<Map<String, dynamic>> response =
+          await dio.post('/api/v1/order', data: order.toJson());
+
+      return Order.fromJson(response.data!);
+    } catch (e) {
+      // Handle Dio errors or server errors
+      print('Error: $e');
+      throw Exception('Failed to add new order: $e');
+    }
+  }
+
+  Future<void> deleteOrder(String id) async {
+    try {
+      Response<Map<String, dynamic>> response =
+          await dio.delete("/api/v1/order/:id");
+    } catch (e) {
+      // Handle Dio errors or server errors
+      print('Error: $e');
+      throw Exception('Failed to delete order: $e');
     }
   }
 }

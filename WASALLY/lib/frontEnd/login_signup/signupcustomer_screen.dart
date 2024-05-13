@@ -235,13 +235,13 @@ class _SignUpCustomerState extends State<SignUpCustomer> {
                               // print(newUser!.email);
 
                               // if (newUser != null) {
-                                // Registration successful, navigate to a success screen
-                                Navigator.pushReplacement(
-                                  context,
-                                  MaterialPageRoute(
-                                    builder: (context) => const LoginScreen(),
-                                  ),
-                                );
+                              // Registration successful, navigate to a success screen
+                              Navigator.pushReplacement(
+                                context,
+                                MaterialPageRoute(
+                                  builder: (context) => const LoginScreen(),
+                                ),
+                              );
                               // } else {
                               //   // Registration failed, show error message
                               //   showDialog(
