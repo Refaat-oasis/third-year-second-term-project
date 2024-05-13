@@ -10,7 +10,7 @@ class ApiService {
     dio = Dio(
       // change every time
       BaseOptions(
-        baseUrl: "http://192.168.204.29:3000",
+        baseUrl: "http://192.168.1.197:3000",
       ),
     );
   }
@@ -36,8 +36,7 @@ class ApiService {
           'password': password,
         },
       );
-
-      if (response.statusCode == 200) {
+      if (response.statusCode == 201) {
         // Successful login
         return user_model.fromJson(response.data!);
       } else {

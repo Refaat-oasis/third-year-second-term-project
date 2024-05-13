@@ -1,4 +1,4 @@
-// ignore_for_file: sized_box_for_whitespace, use_build_context_synchronously, avoid_print
+// ignore_for_file: sized_box_for_whitespace, use_build_context_synchronously, avoid_print, unnecessary_null_comparison
 
 import 'package:Wasally/frontEnd/models/user_model.dart';
 import 'package:Wasally/frontEnd/services/api_service.dart';
@@ -103,7 +103,7 @@ class _SignUpCustomerState extends State<SignUpCustomer> {
                           controller: phonenumbercontroller,
                           keyboardType: TextInputType.phone,
                           validator: (value) {
-                            final RegExp phoneRegex = RegExp(r'^[0-9]{7,}$');
+                            final RegExp phoneRegex = RegExp(r'^[0-9]{11}$');
                             if (!phoneRegex.hasMatch(value!)) {
                               return 'Invalid phone number';
                             } else {
@@ -231,7 +231,9 @@ class _SignUpCustomerState extends State<SignUpCustomer> {
                                 // Use await to wait for the completion of the addNewUser method
                                 user_model? newUser =
                                     await ApiService().addNewUser(user);
-                                print(newUser);
+
+                                print(newUser!.email);
+
                                 if (newUser != null) {
                                   // Registration successful, navigate to a success screen
                                   Navigator.pushReplacement(

@@ -61,3 +61,5 @@ USER_SCHEMA.pre("save", async function (next) {
 
 const USER = MONGOOSE.model("UserCollection", USER_SCHEMA);
 module.exports = USER;
+
+
