@@ -2,7 +2,6 @@
 
 import 'package:Wasally/frontEnd/models/user_model.dart';
 import 'package:Wasally/frontEnd/services/api_service.dart';
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import '../login_signup/login_screen.dart';
 
@@ -19,21 +18,6 @@ class _SignUpCustomerState extends State<SignUpCustomer> {
   final TextEditingController usernameController = TextEditingController();
   final TextEditingController emailcontroller = TextEditingController();
   final TextEditingController passwordcontroller = TextEditingController();
-
-  // Future addnewuser() async {
-  //   print('add new user');
-  //   try {
-  //     await FirebaseFirestore.instance.collection('users').add({
-  //       'username': usernameController.text.trim(),
-  //       'email': emailcontroller.text.trim(),
-  //       'password': passwordcontroller.text.trim(),
-  //       'phonenumber': phonenumbercontroller.text.trim(),
-  //     });
-  //     print('user added successfully!');
-  //   } catch (e) {
-  //     print('Error adding user: $e');
-  //   }
-  // }
 
   @override
   Widget build(BuildContext context) {
@@ -247,7 +231,7 @@ class _SignUpCustomerState extends State<SignUpCustomer> {
                                 // Use await to wait for the completion of the addNewUser method
                                 user_model? newUser =
                                     await ApiService().addNewUser(user);
-
+                                print(newUser);
                                 if (newUser != null) {
                                   // Registration successful, navigate to a success screen
                                   Navigator.pushReplacement(

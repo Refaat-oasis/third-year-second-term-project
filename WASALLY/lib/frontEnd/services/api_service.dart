@@ -10,7 +10,7 @@ class ApiService {
     dio = Dio(
       // change every time
       BaseOptions(
-        baseUrl: "http://192.168.1.204:3000",
+        baseUrl: "http://192.168.204.29:3000",
       ),
     );
   }
@@ -19,13 +19,7 @@ class ApiService {
       Response<Map<String, dynamic>> response =
           await dio.post('/api/v1/user', data: user.toJson());
 
-      if (response.statusCode == 200) {
-        // Request was successful, parse response data
-        return user_model.fromJson(response.data!);
-      } else {
-        // Request was not successful, throw an exception
-        throw Exception('Failed to add new user: ${response.statusCode}');
-      }
+      return user_model.fromJson(response.data!);
     } catch (e) {
       // Handle Dio errors or server errors
       print('Error: $e');
@@ -33,7 +27,7 @@ class ApiService {
     }
   }
 
-  Future<bool> login(String email, String password) async {
+  Future<user_model?> authenticate(String email, String password) async {
     try {
       Response response = await dio.post(
         '/api/v1/user/authentication',
@@ -45,15 +39,15 @@ class ApiService {
 
       if (response.statusCode == 200) {
         // Successful login
-        return true;
+        return user_model.fromJson(response.data!);
       } else {
         // Handle unsuccessful login
-        return false;
+        return null;
       }
     } catch (e) {
       // Handle Dio errors
       print('Error: $e');
-      return false;
+      return null;
     }
   }
 }

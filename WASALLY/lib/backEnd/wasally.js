@@ -32,7 +32,6 @@ APP.use((req, res, next) => {
 
 // TALK TO ROUTES
 
-
 APP.use("/api/v1/user", USER_ROUTERS);
 APP.use("/api/v1/driver", DRIVER_ROUTERS);
 APP.use("/api/v1/order", ORDER_ROUTERS);

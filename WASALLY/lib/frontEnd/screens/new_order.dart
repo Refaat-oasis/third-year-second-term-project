@@ -566,7 +566,7 @@ class _NewOrderState extends State<NewOrderScreen> {
                       onPressed: () {
                         if (formKey.currentState!.validate()) {
                           // addneworder();
-                          const bool isaccepted = false;
+                          //  const bool isaccepted = false;
                           Navigator.push(
                               context,
                               MaterialPageRoute(

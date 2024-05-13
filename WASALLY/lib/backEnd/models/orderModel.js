@@ -95,10 +95,6 @@ const ORDER_SCHEMA = new MONGOOSE.Schema({
 		type: String,
 		required: false,
 	},
-	driverIDMethod: {
-		type: MONGOOSE.Schema.Types.ObjectId,
-		ref: "Driver",
-	},
 });
 
 const ORDER = MONGOOSE.model("OrderCollection", ORDER_SCHEMA);

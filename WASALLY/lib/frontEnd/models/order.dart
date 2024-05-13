@@ -1,28 +1,30 @@
 class Order {
-  final DateTime creationDate;
-  final String orderStatus;
-  final String dlelivaryMethod;
-  final String orderPrice;
-  final String sourceCity;
-  final String sourceStreet;
-  final String sourceHouse;
-  final String sourceFlat;
-  final String sourceContactName;
-  final String sourceContactPhone;
-  final String sourceContactAddress;
-  final String destinationCity;
-  final String destinationStreet;
-  final String destinationHouse;
-  final String destinationFlat;
-  final String destinationContactName;
-  final String destinationContactPhone;
-  final String destinationContactAddress;
-  final String userID;
-  final String driverID;
+  late String? id;
+  late DateTime? creationDate;
+  late String? orderStatus;
+  late String dlelivaryMethod;
+  late String orderPrice;
+  late String sourceCity;
+  late String sourceStreet;
+  late String sourceHouse;
+  late String sourceFlat;
+  late String sourceContactName;
+  late String sourceContactPhone;
+  late String sourceContactAddress;
+  late String destinationCity;
+  late String destinationStreet;
+  late String destinationHouse;
+  late String destinationFlat;
+  late String destinationContactName;
+  late String destinationContactPhone;
+  late String destinationContactAddress;
+  late String? userID;
+  late String? driverID;
 
   Order({
-    required this.creationDate,
-    required this.orderStatus,
+    this.id,
+    this.creationDate,
+    this.orderStatus,
     required this.dlelivaryMethod,
     required this.orderPrice,
     required this.sourceCity,
@@ -39,11 +41,12 @@ class Order {
     required this.destinationContactName,
     required this.destinationContactPhone,
     required this.destinationContactAddress,
-    required this.userID,
-    required this.driverID,
+    this.userID,
+    this.driverID,
   });
 
   factory Order.fromJson(Map<String, dynamic> json) => Order(
+        id: json['_id'],
         creationDate: json['creationDate'],
         orderStatus: json['orderStatus'],
         dlelivaryMethod: json['dlelivaryMethod'],
@@ -67,8 +70,6 @@ class Order {
       );
 
   Map<String, dynamic> toJson() => {
-        'creationDate': creationDate,
-        'orderStatus': orderStatus,
         'dlelivaryMethod': dlelivaryMethod,
         'orderPrice': orderPrice,
         'sourceCity': sourceCity,

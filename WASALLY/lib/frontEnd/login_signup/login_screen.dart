@@ -1,13 +1,9 @@
 // ignore_for_file: use_build_context_synchronously, avoid_print, sized_box_for_whitespace, avoid_types_as_parameter_names, non_constant_identifier_names, unnecessary_string_interpolations, unused_local_variable
 
-// import 'package:Wasally/frontEnd/layout/layout.dart';
 import 'package:Wasally/frontEnd/layout/layout.dart';
 import 'package:Wasally/frontEnd/models/user_model.dart';
 import 'package:Wasally/frontEnd/services/api_service.dart';
-// import 'package:Wasally/frontEnd/screens/delivery_home.dart';
-// import 'package:Wasally/frontEnd/screens/new_order.dart';
 import 'package:flutter/material.dart';
-// import '../layout/layout.dart';
 import '../login_signup/signupcustomer_screen.dart';
 
 class LoginScreen extends StatefulWidget {
@@ -174,23 +170,37 @@ class _LoginScreenState extends State<LoginScreen> {
                             if (formKey.currentState!.validate()) {
                               String email = emailController.text;
                               String password = passwordController.text;
-                              // user_model user = user_model(
-                              //     email: email,
-                              //     name: 'name',
-                              //     password: password,
-                              //     mobilePhone: 'mobilePhone');
-                              // bool login =
-                              //     await ApiService().login(email, password);
-                              // if (login) {
-                              Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                  builder: (BuildContext) {
-                                    return const LayoutScreen();
+                              user_model? loggedUser = await ApiService()
+                                  .authenticate(email, password);
+                              if (loggedUser != null) {
+                                Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                    builder: (BuildContext) {
+                                      return const LayoutScreen();
+                                    },
+                                  ),
+                                );
+                              } else {
+                                showDialog(
+                                  context: context,
+                                  builder: (BuildContext context) {
+                                    return AlertDialog(
+                                      title: const Text('Registration Error'),
+                                      content: const Text(
+                                          'Failed to create user account. Please try again later.'),
+                                      actions: <Widget>[
+                                        TextButton(
+                                          onPressed: () {
+                                            Navigator.of(context).pop();
+                                          },
+                                          child: const Text('OK'),
+                                        ),
+                                      ],
+                                    );
                                   },
-                                ),
-                              );
-                              // }
+                                );
+                              }
                             }
                           },
                           child: const Text(
