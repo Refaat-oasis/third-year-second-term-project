@@ -227,64 +227,64 @@ class _SignUpCustomerState extends State<SignUpCustomer> {
                                 mobilePhone: phonenumbercontroller.text,
                                 password: passwordcontroller.text,
                               );
-                              try {
-                                // Use await to wait for the completion of the addNewUser method
-                                user_model? newUser =
-                                    await ApiService().addNewUser(user);
+                              // try {
+                              // Use await to wait for the completion of the addNewUser method
+                              user_model? newUser =
+                                  await ApiService().addNewUser(user);
 
-                                print(newUser!.email);
+                              // print(newUser!.email);
 
-                                if (newUser != null) {
-                                  // Registration successful, navigate to a success screen
-                                  Navigator.pushReplacement(
-                                    context,
-                                    MaterialPageRoute(
-                                      builder: (context) => const LoginScreen(),
-                                    ),
-                                  );
-                                } else {
-                                  // Registration failed, show error message
-                                  showDialog(
-                                    context: context,
-                                    builder: (BuildContext context) {
-                                      return AlertDialog(
-                                        title: const Text('Registration Error'),
-                                        content: const Text(
-                                            'Failed to create user account. Please try again later.'),
-                                        actions: <Widget>[
-                                          TextButton(
-                                            onPressed: () {
-                                              Navigator.of(context).pop();
-                                            },
-                                            child: const Text('OK'),
-                                          ),
-                                        ],
-                                      );
-                                    },
-                                  );
-                                }
-                              } catch (e) {
-                                // Handle registration failure or Dio errors
-                                print('Error: $e');
-                                showDialog(
-                                  context: context,
-                                  builder: (BuildContext context) {
-                                    return AlertDialog(
-                                      title: const Text('Registration Error'),
-                                      content: const Text(
-                                          'Failed to create user account. Please try again later.'),
-                                      actions: <Widget>[
-                                        TextButton(
-                                          onPressed: () {
-                                            Navigator.of(context).pop();
-                                          },
-                                          child: const Text('OK'),
-                                        ),
-                                      ],
-                                    );
-                                  },
+                              // if (newUser != null) {
+                                // Registration successful, navigate to a success screen
+                                Navigator.pushReplacement(
+                                  context,
+                                  MaterialPageRoute(
+                                    builder: (context) => const LoginScreen(),
+                                  ),
                                 );
-                              }
+                              // } else {
+                              //   // Registration failed, show error message
+                              //   showDialog(
+                              //     context: context,
+                              //     builder: (BuildContext context) {
+                              //       return AlertDialog(
+                              //         title: const Text('Registration Error'),
+                              //         content: const Text(
+                              //             'Failed to create user account. Please try again later.'),
+                              //         actions: <Widget>[
+                              //           TextButton(
+                              //             onPressed: () {
+                              //               Navigator.of(context).pop();
+                              //             },
+                              //             child: const Text('OK'),
+                              //           ),
+                              //         ],
+                              //       );
+                              //     },
+                              //   );
+                              // }
+                              // } catch (e) {
+                              //   // Handle registration failure or Dio errors
+                              //   print('Error: $e');
+                              //   showDialog(
+                              //     context: context,
+                              //     builder: (BuildContext context) {
+                              //       return AlertDialog(
+                              //         title: const Text('Registration Error'),
+                              //         content: const Text(
+                              //             'Failed to create user account. Please try again later.'),
+                              //         actions: <Widget>[
+                              //           TextButton(
+                              //             onPressed: () {
+                              //               Navigator.of(context).pop();
+                              //             },
+                              //             child: const Text('OK'),
+                              //           ),
+                              //         ],
+                              //       );
+                              //     },
+                              //   );
+                              // }
                             }
                           },
                           child: const Text(
