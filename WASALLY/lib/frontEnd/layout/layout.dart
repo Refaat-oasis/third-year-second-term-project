@@ -1,13 +1,15 @@
+import 'package:flutter/material.dart';
+import 'package:Wasally/frontEnd/models/user_model.dart';
 import 'package:Wasally/frontEnd/screens/help_screen.dart';
 import 'package:Wasally/frontEnd/screens/history.dart';
 import 'package:Wasally/frontEnd/screens/new_order.dart';
 import 'package:Wasally/frontEnd/screens/setting.dart';
-import 'package:flutter/material.dart';
 
 class LayoutScreen extends StatefulWidget {
   static const String routeName = 'layout';
+  final user_model? loggedUser; // Define loggedUser property
 
-  const LayoutScreen({Key? key}) : super(key: key);
+  const LayoutScreen({Key? key, this.loggedUser}) : super(key: key);
 
   @override
   State<LayoutScreen> createState() => LayoutScreenState();
@@ -44,8 +46,9 @@ class LayoutScreenState extends State<LayoutScreen> {
     screens = [
       const NewOrderScreen(),
       TopicsPage(),
-      history(),
-      SettingScreen(),
+      const history(),
+      SettingScreen(
+          loggedUser: widget.loggedUser), // Access loggedUser from widget
     ];
   }
 

@@ -11,7 +11,7 @@ class ApiService {
     dio = Dio(
       // change every time
       BaseOptions(
-        baseUrl: "http://192.168.1.197:3000",
+        baseUrl: "http://172.20.10.6:3000",
       ),
     );
   }
@@ -20,7 +20,7 @@ class ApiService {
       Response<Map<String, dynamic>> response =
           await dio.post('/api/v1/user', data: user.toJson());
 
-      return user_model.fromJson(response.data!);
+      return user_model.fromJson(response.data?['data']);
     } catch (e) {
       // Handle Dio errors or server errors
       print('Error: $e');
@@ -28,20 +28,43 @@ class ApiService {
     }
   }
 
+  Future<user_model?> updateUser(user_model user) async {
+    try {
+      String? userID = user.id;
+      Response<Map<String, dynamic>> response =
+          await dio.patch('/api/v1/user/$userID', data: user.toJson());
+
+      return user_model.fromJson(response.data?['data']);
+    } catch (e) {
+      // Handle Dio errors or server errors
+      print('Error in the update user service: $e');
+      throw Exception('Failed to update user: $e');
+    }
+  }
+
   Future<user_model?> authenticate(String email, String password) async {
     try {
-      Response response = await dio.post(
+      Response response = await dio.get(
         '/api/v1/user/authentication',
         data: {
           'email': email,
           'password': password,
         },
       );
-      if (response.statusCode == 201) {
-        // Successful login
-        return user_model.fromJson(response.data!);
+
+      // Check if request was successful
+      if (response.statusCode == 200) {
+        // Ensure data is not null before parsing
+        if (response.data != null && response.data['data'] != null) {
+          return user_model.fromJson(response.data['data']);
+        } else {
+          // Handle unexpected response format
+          print('Error: Unexpected response format');
+          return null;
+        }
       } else {
-        // Handle unsuccessful login
+        // Handle server errors
+        print('Error: Server returned ${response.statusCode}');
         return null;
       }
     } catch (e) {

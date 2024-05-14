@@ -170,14 +170,16 @@ class _LoginScreenState extends State<LoginScreen> {
                             if (formKey.currentState!.validate()) {
                               String email = emailController.text;
                               String password = passwordController.text;
-                              user_model? loggedUser = await ApiService()
+                              user_model? userloged = await ApiService()
                                   .authenticate(email, password);
-                              if (loggedUser != null) {
+                              if (userloged != null) {
                                 Navigator.push(
                                   context,
                                   MaterialPageRoute(
-                                    builder: (BuildContext) {
-                                      return const LayoutScreen();
+                                    builder: (BuildContext context) {
+                                      return LayoutScreen(
+                                          loggedUser:
+                                              userloged); // Pass userloged object
                                     },
                                   ),
                                 );
@@ -186,9 +188,9 @@ class _LoginScreenState extends State<LoginScreen> {
                                   context: context,
                                   builder: (BuildContext context) {
                                     return AlertDialog(
-                                      title: const Text('Registration Error'),
+                                      title: const Text('Login Error'),
                                       content: const Text(
-                                          'Failed to create user account. Please try again later.'),
+                                          'Failed to login. Please try again later.'),
                                       actions: <Widget>[
                                         TextButton(
                                           onPressed: () {

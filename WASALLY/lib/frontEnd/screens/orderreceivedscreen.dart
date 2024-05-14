@@ -1,7 +1,11 @@
+// ignore_for_file: library_private_types_in_public_api
+
 import 'package:flutter/material.dart';
 import 'package:Wasally/frontEnd/layout/layout.dart';
 
 class OrderReceivedScreen extends StatefulWidget {
+  const OrderReceivedScreen({super.key});
+
   @override
   _OrderReceivedScreenState createState() => _OrderReceivedScreenState();
 }
@@ -16,7 +20,7 @@ class _OrderReceivedScreenState extends State<OrderReceivedScreen>
     super.initState();
     _controller = AnimationController(
       vsync: this,
-      duration: Duration(milliseconds: 1000),
+      duration: const Duration(milliseconds: 1000),
     );
 
     _animation = CurvedAnimation(
@@ -27,9 +31,9 @@ class _OrderReceivedScreenState extends State<OrderReceivedScreen>
     _controller.forward();
 
     // Add a delay before automatically navigating back to the previous screen
-    Future.delayed(Duration(seconds: 3), () {
-      Navigator.push(
-          context, MaterialPageRoute(builder: (context) =>const LayoutScreen()));
+    Future.delayed(const Duration(seconds: 3), () {
+      Navigator.push(context,
+          MaterialPageRoute(builder: (context) => const LayoutScreen()));
     });
   }
 
@@ -43,12 +47,12 @@ class _OrderReceivedScreenState extends State<OrderReceivedScreen>
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text("Order Received"),
+        title: const Text("Order Received"),
       ),
       body: Center(
         child: FadeTransition(
           opacity: _animation,
-          child: Column(
+          child: const Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               Icon(

@@ -1,5 +1,6 @@
 // ignore_for_file: sized_box_for_whitespace, use_build_context_synchronously, unused_import, must_be_immutable
 
+import 'package:Wasally/frontEnd/services/api_service.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import '../login_signup/login_screen.dart';
@@ -7,11 +8,9 @@ import '../models/user_model.dart';
 import '../login_signup/signupcustomer_screen.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 
-// final FirebaseFirestore _firestore = FirebaseFirestore.instance;
-// WriteBatch batch = FirebaseFirestore.instance.batch();
-
 class SettingScreen extends StatefulWidget {
-  SettingScreen({super.key});
+  final user_model? loggedUser;
+  const SettingScreen({super.key, this.loggedUser});
 
   @override
   State<SettingScreen> createState() => _SignUpCustomerState();
@@ -244,37 +243,13 @@ class _SignUpCustomerState extends State<SettingScreen> {
                               borderRadius: BorderRadius.circular(18)),
                           color: Colors.orange,
                           onPressed: () async {
+                            user_model updatedUser = user_model(
+                                email: emaileditcontroller.text,
+                                name: usernameeditController.text,
+                                password: passwordeditcontroller.text,
+                                mobilePhone: phonenumbereditcontroller.text);
                             if (formKey.currentState!.validate()) {
-                              // if () {
-                              //   await batch.commit();
-                              //   await _firestore
-                              //       .collection('drivers')
-                              //       .doc(userModel.id)
-                              //       .update(
-                              //     {
-                              //       'username': usernameeditController.text,
-                              //       'phonenumber':
-                              //           phonenumbereditcontroller.text,
-                              //       'email': emaileditcontroller.text,
-                              //       'password': passwordeditcontroller.text,
-                              //     },
-                              //   );
-                              // } else {
-                              //   await batch.commit();
-                              //   await _firestore
-                              //       .collection('users')
-                              //       .doc(userModel.id)
-                              //       .update(
-                              //     {
-                              //       'username': usernameeditController.text,
-                              //       'phonenumber':
-                              //           phonenumbereditcontroller.text,
-                              //       'email': emaileditcontroller.text,
-                              //       'password': passwordeditcontroller.text,
-                              //     },
-                              //   );
-                              // }
-                              // ;
+                              await ApiService().updateUser(updatedUser);
                               Navigator.push(
                                 context,
                                 MaterialPageRoute(
